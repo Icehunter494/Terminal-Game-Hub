@@ -1,5 +1,5 @@
 import os
-from games import rps_15, mad_libs, bullet_hell, roguelike
+from games import rps_15, mad_libs, bullet_hell, roguelike, battleship
 
 
 
@@ -14,7 +14,8 @@ def main_menu():
         "1": ("Rock Paper Scissors", rps_15.run),
         "2": ("Madlibs", mad_libs.run),
         "3": ("Bullet Hell", bullet_hell.run),
-        "4": ("Dungeon Crawler", roguelike.run)
+        "4": ("Dungeon Crawler", roguelike.run),
+        "5": ("Battleship", battleship.run)
     }
 
     while True:

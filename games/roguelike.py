@@ -85,4 +85,3 @@ def game_loop(stdscr):
                player.hp = min(player.max_hp, player.hp + itm.power)
                items.remove(itm)
        stdscr.refresh()
-       if "q": break
