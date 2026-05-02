@@ -1,5 +1,5 @@
 import os
-from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048
+from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048, connect4
 
 
 
@@ -16,12 +16,13 @@ def main_menu():
         "3": ("Bullet Hell", bullet_hell.run),
         "4": ("Dungeon Crawler", roguelike.run),
         "5": ("Battleship", battleship.run),
-        "6": ("2048", game_2048.run)
+        "6": ("2048", game_2048.run),
+        "7": ("Connect 4", connect4.run)
     }
 
     while True:
       clear_screen()
-      print("--- Hi! ---")
+      print("--- Hi!! ---")
       for key, (name, _) in game_map.items():
          print(f"{key}. {name}")
       print("Q to quit")
