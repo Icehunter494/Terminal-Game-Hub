@@ -1,5 +1,5 @@
 import os
-from games import rps_15, mad_libs, bullet_hell, roguelike, battleship
+from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048
 
 
 
@@ -15,7 +15,8 @@ def main_menu():
         "2": ("Madlibs", mad_libs.run),
         "3": ("Bullet Hell", bullet_hell.run),
         "4": ("Dungeon Crawler", roguelike.run),
-        "5": ("Battleship", battleship.run)
+        "5": ("Battleship", battleship.run),
+        "6": ("2048", game_2048.run)
     }
 
     while True:
