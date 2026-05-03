@@ -8,7 +8,7 @@ def create_board(size, mines):
 
     #plant the boombooms
     while len(mine_locations) < mines:
-        r, c = random.randint(0, size-1), random.randit(0, size-1)
+        r, c = random.randint(0, size-1), random.randint(0, size-1)
         if (r, c) not in mine_locations:
             board[r][c] = '*'
             mine_locations.add((r, c))
