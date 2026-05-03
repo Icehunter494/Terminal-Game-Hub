@@ -19,7 +19,8 @@ def calculate_score(hand):
     while score > 21 and aces:
         score -= 10
         aces -= 1
-    return
+    
+    return score
 
 def draw_table(player_hand, dealer_hand, show_dealer=False):
     os.system('cls' if os.name == 'nt' else 'clear')
