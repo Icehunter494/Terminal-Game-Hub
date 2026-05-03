@@ -1,5 +1,5 @@
 import os
-from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048, connect4, minesweeper
+from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048, connect4, minesweeper, blackjack
 
 
 
@@ -18,7 +18,8 @@ def main_menu():
         "5": ("Battleship", battleship.run),
         "6": ("2048", game_2048.run),
         "7": ("Connect 4", connect4.run),
-        "8": ("Minesweeper", minesweeper.run)
+        "8": ("Minesweeper", minesweeper.run),
+        "9": ("Blackjack", blackjack.run)
     }
 
     while True:
