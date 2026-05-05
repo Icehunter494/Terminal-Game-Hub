@@ -1,49 +1,104 @@
 import os
-from games import rps_15, mad_libs, bullet_hell, roguelike, battleship, game_2048, connect4, minesweeper, blackjack, space_trader, snake, sudoku
+import importlib
+import inspect
+import sys   
 
 
+if hasattr(sys, '_MEIPASS'):
+    BASE_PATH = sys._MEIPASS
+else:
+    BASE_PATH = os.path.abspath(".")
 
-
+GAMES_FOLDER = os.path.join(BASE_PATH, "games")
 
 def clear_screen():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+
+#autoload
+def load_games():
+    games = []
+
+    for file in os.listdir(GAMES_FOLDER):
+        if file.endswith(".py") and file != "__init__.py":
+            module_name = file[:-3]
+
+            try:
+                module = importlib.import_module(f"{GAMES_FOLDER}.{module_name}")
+
+                # Clean display name
+                name = getattr(
+                    module,
+                    "GAME_NAME",
+                    module_name.replace("_", " ").title()
+                )
+
+                # Priority: run_game()
+                if hasattr(module, "run_game"):
+                    games.append((name, module.run_game))
+
+                # Fallback: run()
+                elif hasattr(module, "run"):
+                    func = module.run
+                    params = inspect.signature(func).parameters
+
+                    if len(params) == 1:
+                        # curses game → wrap it automatically
+                        def wrapper(f=func):
+                            import curses
+                            curses.wrapper(f)
+                        games.append((name, wrapper))
+                    else:
+                        # normal game
+                        games.append((name, func))
+
+            except Exception as e:
+                print(f"Failed to load {module_name}: {e}")
+
+    return games
+
+#main menu
+
 def main_menu():
-    #start func
-    game_map = {
-        "1": ("Rock Paper Scissors", rps_15.run),
-        "2": ("Madlibs", mad_libs.run),
-        "3": ("Bullet Hell", bullet_hell.run),
-        "4": ("Dungeon Crawler", roguelike.run),
-        "5": ("Battleship", battleship.run),
-        "6": ("2048", game_2048.run),
-        "7": ("Connect 4", connect4.run),
-        "8": ("Minesweeper", minesweeper.run),
-        "9": ("Blackjack", blackjack.run),
-        "10": ("Space Trader", space_trader.run),
-        "11": ("Snake", snake.run),
-        "12": ("Sudoku", sudoku.run)
-    }
-
     while True:
-      clear_screen()
-      print("--- Hi!! ---")
-      for key, (name, _) in game_map.items():
-         print(f"{key}. {name}")
-      print("Q to quit")
+        clear_screen()
 
-      choice = input("\nSelect a game to load: ").strip().upper()
+        games = load_games()
 
-      if choice == 'Q':
+        print("=== TERMINAL GAME HUB ===\n")
+
+        for i, (name, _) in enumerate(games, 1):
+            print(f"{i}. {name}")
+
+        print("\nSelect a number to launch a game")
+        print("Q. Quit")
+
+        choice = input("\n> ").strip().lower()
+
+        if choice == 'q':
             print("Shutting down...")
             break
-      elif choice in game_map:
-          print(f"Loading {game_map[choice][0]}...")
-          #calls run
-          game_map[choice][1]()
-          input("\nGame Over. Press Enter to return to Hub...")
-      else:
-          print("Invalid selection.")
 
+        if choice.isdigit():
+            idx = int(choice) - 1
+
+            if 0 <= idx < len(games):
+                name, game_func = games[idx]
+
+                print(f"\nLoading {name}...")
+
+                try:
+                    game_func()
+                except Exception as e:
+                    print(f"Game crashed: {e}")
+
+                input("\nPress Enter to return to menu...")
+            else:
+                input("Invalid selection. Press Enter...")
+
+        else:
+            input("Invalid input. Press Enter...")
+
+#entry
 if __name__ == "__main__":
     main_menu()

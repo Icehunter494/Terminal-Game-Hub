@@ -1,13 +1,152 @@
-Game Hub that can all be ran in a terminal!!!
+Terminal Game Hub
 
-Current games
-    - Bullet Hell (non function ATP)
-    - RPS Ultimate
-    - Madlibs
-    - Rougelike
-    - Battleship
-    - 2048
-    - Connect 4
-    - Minesweeper
-    - Blackjack
-    - Space Trader
+A collection of multiple games that can all be played directly in the terminal. This project is designed to bundle a variety of classic and experimental games into one simple, lightweight hub without requiring a graphical interface.
+
+Requirements
+Python 3.8 or higher
+
+Windows Users
+
+The curses module is not included by default on Windows. You must install it manually:
+
+pip install windows-curses
+
+Game List
+
+Arcade / Real-Time Games
+
+Snake
+
+Pong (2-player)
+
+Breakout
+
+Asteroids
+
+Bullet Hell (work in progress)
+
+Strategy / Simulation
+
+Space Trader
+
+Stock Market Simulator
+
+Puzzle / Logic Games
+
+Sudoku
+
+Mastermind
+
+Word Scramble
+
+2048
+
+Connect 4
+
+Minesweeper
+
+Classic / Casual Games
+
+Blackjack
+
+Battleship
+
+Rock Paper Scissors Ultimate
+
+Mad Libs
+
+Hangman
+
+Exploration / Other
+
+Roguelike Dungeon Crawler
+
+Maze Runner
+
+Featured Games
+
+Stock Market Simulator
+
+A dynamic trading simulation with:
+
+multiple stocks with volatility and trends
+bull and bear market cycles
+random news events affecting prices
+dividend payouts
+portfolio and net worth tracking
+
+Asteroids
+
+A real-time space shooter featuring:
+
+ship rotation and thrust physics
+bullet shooting system
+moving asteroids
+collision detection
+score tracking and restart system
+
+Breakout
+
+A brick-breaking arcade game with:
+
+paddle and ball physics
+destructible brick grid
+score tracking
+win/lose conditions
+
+Pong
+
+A two-player competitive game:
+
+local multiplayer controls
+score tracking
+win condition system
+
+Blackjack
+
+A terminal-based card game:
+
+hit and stand mechanics
+dealer AI
+proper scoring rules
+Adding New Games
+
+To add a new game:
+
+Create a .py file inside the /games folder
+Add one of the following entry functions:
+
+Standard game:
+
+def run():
+
+Curses-based game:
+
+def run(stdscr):
+(Optional) Add a display name:
+GAME_NAME = "My Game"
+
+The hub will automatically detect and load the game.
+
+Controls
+
+Controls vary per game. Most games display their controls on launch. Common patterns include:
+
+Arrow keys for movement
+WASD for alternative controls
+Q to quit
+R to restart
+
+Notes
+
+All games are designed for terminal play only
+Some games require a sufficiently large terminal window
+Performance may vary depending on terminal and system
+
+Future Improvements
+
+Additional games (Tetris, Bomberman, Tower Defense)
+
+Improved UI for the main hub
+More advanced game mechanics and polish
+Optional save systems for certain games
